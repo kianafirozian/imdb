@@ -1,12 +1,12 @@
+// in all mappings if we open {} we should *return* the div inside but we if open () we doesn't need curly braces
+import Card from "./Card";
+
 export default function Results({ results }) {
   return (
-    <div>
+    <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-6xl mx-auto py-4">
       {results.map((result) => (
-        <div key={result.id}>
-          <p>{result.original_title}</p>
-        </div>
+        <Card key={result.id} result={result} />
       ))}
     </div>
   );
 }
-// in all mappings if we open {} we should *return* the div inside but we if open () we doesn't need curly braces
