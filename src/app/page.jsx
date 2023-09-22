@@ -1,8 +1,30 @@
-import Image from "next/image";
-import { Inter } from "@next/font/google";
+import Results from "@/components/Results";
 
-const inter = Inter({ subsets: ["latin"] });
+const API_KEY = process.env.API_KEY;
 
-export default function Home() {
-  return <h1 className="text-red-400">Home</h1>;
+// in order to use ssr fetching we need to change our function to async which is possible in next 13 and above
+
+export default async function Home({ searchParams }) {
+  const genre = searchParams.genre || "fetchTrending";
+  console.log("genre---", genre);
+  const res = await fetch(
+    `https://api.themoviedb.org/3/${
+      genre === "fetchTopRated" ? "movie/top_rated" : "trending/all/week"
+    }?api_key=${API_KEY}&language=en-US&page=1`,
+    { next: { revalidate: 10000 } }
+  );
+
+  const data = await res.json();
+
+  const results = data.results;
+
+  if (!res.ok) {
+    throw new Error("Failed to Fetch data");
+  }
+
+  return (
+    <div>
+      <Results results={results} />
+    </div>
+  );
 }
