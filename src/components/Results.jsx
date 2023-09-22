@@ -9,3 +9,4 @@ export default function Results({ results }) {
     </div>
   );
 }
+// in all mappings if we open {} we should *return* the div inside but we if open () we doesn't need curly braces
