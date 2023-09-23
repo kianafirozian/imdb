@@ -43,7 +43,7 @@ export default async function MoviePage({ params }) {
           </p>
           <p className="mb-3">
             <span className="font-semibold mr-1">Rating:</span>
-            {movie.vote_average.toFixed(1)}
+            {movie.vote_average?.toFixed(1)}
           </p>
         </div>
       </div>
